@@ -5,7 +5,7 @@ const productRoutes = Router();
 
 
 
-productRoutes.get('/productos', (req:Request, res:Response)=>{
+productRoutes.get('/', (req:Request, res:Response)=>{
 
     console.log('productos')
 })

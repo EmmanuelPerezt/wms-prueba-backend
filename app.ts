@@ -12,11 +12,11 @@ app.use(express.json());
 
 //routes
 app.get('/',(req:Request,res:Response)=>{
-    res.send('que pasa perro ooo__00__000')
+    res.send('api corriendo')
 })
-app.use('/api/',bodegasRoutes);
-app.use('/api/',productRoutes)
+app.use('/api/bodegas',bodegasRoutes);
+app.use('/api/productos',productRoutes)
 
 app.listen(3000, ()=>{
     console.log('server corriendo en puerto 3000')
-});
+})
