@@ -15,7 +15,7 @@ app.get('/',(req:Request,res:Response)=>{
     res.send('api corriendo')
 })
 app.use('/api/bodegas',bodegasRoutes);
-app.use('/api/productos',productRoutes)
+app.use('/api/stock',productRoutes)
 
 app.listen(3000, ()=>{
     console.log('server corriendo en puerto 3000')
