@@ -1,16 +1,24 @@
-import { bodega } from "../models/bodegasModel";
+import { Bodega } from "../models/bodegasModel";
 import { connectDB } from "../utils/dbConection"
 import { Request, Response } from "express";
 
 
 
-const getAllbodegas = async (req: Request, res:Response) =>{
+export const getAllbodegas = async (req: Request, res: Response) =>{
     await connectDB();
-
+    const bodegas = await Bodega.find();
+    if (bodegas.length === 0){
+         res.status(404).json({
+            message: "no hay bodegas"
+        });
+    }
+         res.status(200).json({
+        bodegas
+        });
 }
 
 
-const addBodega = async (req: Request, res: Response) => {
+export const addBodega = async (req: Request, res: Response) => {
     await connectDB();
 
     const { nombre, direccion, telefono, email, ciudad, estado } = req.body as {
@@ -21,7 +29,7 @@ const addBodega = async (req: Request, res: Response) => {
         ciudad: string;
         estado: string;
     };
-    const newbodega = new bodega({
+    const bodega = new Bodega({
         nombre,
         direccion,
         telefono,
@@ -29,7 +37,7 @@ const addBodega = async (req: Request, res: Response) => {
         ciudad,
         estado
     })
-    await newbodega.save()
+    await bodega.save()
         .then((data)=>{
             res.status(200).json({
                 message: "Bodega creada"

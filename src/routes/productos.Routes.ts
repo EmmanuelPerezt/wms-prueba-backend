@@ -1,14 +1,16 @@
 import { Router, Request, Response } from "express";
+import { addProduct, updateStock } from "../controllers/productosController";
 
 const productRoutes = Router();
 
 
+productRoutes.post('/ingresos', addProduct);
 
 
-productRoutes.get('/', (req:Request, res:Response)=>{
+productRoutes.put('/stock/:id', updateStock);
 
-    console.log('productos')
-})
+
+
 
 
 export {productRoutes}

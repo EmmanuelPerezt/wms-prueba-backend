@@ -1,13 +1,15 @@
-import { Router, Request, Response } from "express";
-
+import { Router } from "express";
+import { getAllbodegas, addBodega } from "../controllers/bodegController";
 
 const bodegasRoutes = Router();
 
 
-bodegasRoutes.get('/', (req:Request,res:Response)=>{
-    console.log('bodegas');
-    res.status(200).send("todo fino pa");
-});
-  export {bodegasRoutes}
+bodegasRoutes.post('/',addBodega);
+bodegasRoutes.get('/', getAllbodegas);
+
+
+
+
+export {bodegasRoutes}
 
 

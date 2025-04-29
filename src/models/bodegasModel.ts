@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 
-const bodega = mongoose.model('bodegas', new mongoose.Schema({
+const Bodega = mongoose.model('bodegas', new mongoose.Schema({
     nombre: {type: String, required: true},
     direccion: {type: String, required: true},
     telefono: {type: String, required: true},
@@ -10,4 +10,4 @@ const bodega = mongoose.model('bodegas', new mongoose.Schema({
     ciudad: {type: String, required: true},
     estado: {type: String, required: true},
 }));
-export {bodega}
+export {Bodega}
