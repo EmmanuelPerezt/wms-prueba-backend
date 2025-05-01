@@ -6,6 +6,8 @@
   "type": "commonjs",
   "main": "app.ts",
   "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node app.ts"
   },

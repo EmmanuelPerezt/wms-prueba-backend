@@ -3,8 +3,7 @@ import { connectDB } from "../utils/dbConection"
 import { Request, Response } from "express";
 
 
-
-export const getAllbodegas = async (req: Request, res: Response) =>{
+const getAllbodegas = async (req: Request, res: Response) =>{
     await connectDB();
     const bodegas = await Bodega.find();
     if (bodegas.length === 0){
@@ -18,7 +17,7 @@ export const getAllbodegas = async (req: Request, res: Response) =>{
 }
 
 
-export const addBodega = async (req: Request, res: Response) => {
+const addBodega = async (req: Request, res: Response) => {
     await connectDB();
 
     const { nombre, direccion, telefono, email, ciudad, estado } = req.body as {
@@ -50,3 +49,5 @@ export const addBodega = async (req: Request, res: Response) => {
             })
         })
 };
+
+export {getAllbodegas, addBodega}
