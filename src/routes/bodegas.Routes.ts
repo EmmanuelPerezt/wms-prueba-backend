@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllbodegas, addBodega } from "../controllers/bodegController";
+import { getAllbodegas, addBodega } from "../controllers/warehouseController";
 
 const bodegasRoutes = Router();
 

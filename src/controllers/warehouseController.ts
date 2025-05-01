@@ -1,11 +1,11 @@
-import { Bodega } from "../models/bodegasModel";
+import { warehouse } from "../models/warehouseModel";
 import { connectDB } from "../utils/dbConection"
 import { Request, Response } from "express";
 
 
 const getAllbodegas = async (req: Request, res: Response) =>{
     await connectDB();
-    const bodegas = await Bodega.find();
+    const bodegas = await warehouse.find();
     if (bodegas.length === 0){
          res.status(404).json({
             message: "no hay bodegas"
@@ -20,21 +20,11 @@ const getAllbodegas = async (req: Request, res: Response) =>{
 const addBodega = async (req: Request, res: Response) => {
     await connectDB();
 
-    const { nombre, direccion, telefono, email, ciudad, estado } = req.body as {
-        nombre: string;
-        direccion: string;
-        telefono: string;
-        email: string;
-        ciudad: string;
-        estado: string;
-    };
-    const bodega = new Bodega({
-        nombre,
-        direccion,
-        telefono,
-        email,
-        ciudad,
-        estado
+    const { name, location, description} = req.body;
+    const bodega = new warehouse({
+        name,
+        location,
+        description,
     })
     await bodega.save()
         .then((data)=>{

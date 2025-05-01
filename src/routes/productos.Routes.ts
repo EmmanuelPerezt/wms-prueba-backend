@@ -1,5 +1,5 @@
-import { Router, Request, Response } from "express";
-import { addProduct, filterProducts, updateStock } from "../controllers/productosController";
+import { Router } from "express";
+import { addProduct, filterProducts, updateStock } from "../controllers/productController";
 
 const productRoutes = Router();
 

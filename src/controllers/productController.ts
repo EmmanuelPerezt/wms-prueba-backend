@@ -1,19 +1,16 @@
 import { Request, Response } from 'express';
 import { connectDB } from '../utils/dbConection';
-import { Producto } from '../models/productosModel';
+import { Product } from '../models/productModel';
 
 
 
 
 export const addProduct = async (req: Request, res: Response) => {
     await connectDB();
-    const { nombre, precio, stock, bodega, } = req.body;
+    const { name, SKU, stock, package_number, provider, warehouse_location} = req.body;
 
-    const newProduct = new Producto({
-        nombre,
-        precio,
-        stock,
-        bodega,
+    const newProduct = new Product({
+        name, SKU, stock, package_number, provider, warehouse_location
     });
 
     await newProduct.save()
@@ -37,8 +34,8 @@ export const updateStock = async (req:Request, res:Response)=>{
    const {id} = req.params;
    const {stock} = req.body;
    await connectDB();
-   await Producto.updateOne({_id:id}, {$set:{stock:stock}});
-   const update = await Producto.find ({_id:id});
+   await Product.updateOne({_id:id}, {$set:{stock:stock}});
+   const update = await Product.find ({_id:id});
 
    res.status(200).json({
        message: "Stock actualizado",
@@ -49,10 +46,10 @@ export const updateStock = async (req:Request, res:Response)=>{
 
 
 export const filterProducts = async (req:Request, res:Response) => {
-    const { nombre, precio, stock, bodega, fechaCreacion } = req.query;
+    const { name, SKU, stock, package_number, provider, warehouse_location} = req.query;
     await connectDB();
     if (!req.query){
-        const allproductos = await Producto.find();
+        const allproductos = await Product.find();
         res.status(200).json({
             message: "Todos los productos",
             allproductos
@@ -60,14 +57,14 @@ export const filterProducts = async (req:Request, res:Response) => {
     }
     //se puede mejorar
 const filtros: any = {};
-    if (nombre) filtros.nombre = nombre;
-    if (precio) filtros.precio = precio;
-    if (stock) filtros.stock = stock;
-    if (bodega) filtros.bodega = bodega;
-    if (fechaCreacion) filtros.fechaCreacion = fechaCreacion;
+    if (name) filtros.name = name;
+    if (SKU) filtros.SKU = SKU;
+    if (stock) filtros.stock= stock;
+    if (package_number) filtros.package_number = package_number;
+    if (provider) filtros.provider = provider;
+    if (warehouse_location) filtros.warehouse_location = warehouse_location;
 
-    
-    const productos =await Producto.find(filtros);
+    const productos =await Product.find(filtros);
     if (productos.length === 0) {
         res.status(404).json({
             message: "No se encontraron productos con esos filtros"
@@ -77,5 +74,4 @@ const filtros: any = {};
         message: "Productos encontrados",
         productos
     })
-
 }
