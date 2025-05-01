@@ -1,13 +1,15 @@
 import express from 'express'
+import cors from 'cors';
 import { Request, Response } from 'express';
 import { productRoutes } from './src/routes/productos.Routes';
 import { bodegasRoutes } from './src/routes/bodegas.Routes';
+import { corsOptions } from './src/utils/cors';
 const app = express();
 
 
 //middleware
 app.use(express.json());
-
+app.use(cors(corsOptions))
 
 
 //routes
