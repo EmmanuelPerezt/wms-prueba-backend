@@ -11,7 +11,8 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use(morgan('dev')); 
+app.use(morgan('dev'));
+app.set('etag', false);
 
 //routes
 app.get('/',(req:Request,res:Response)=>{
