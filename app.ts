@@ -3,14 +3,13 @@ import cors from 'cors';
 import { Request, Response } from 'express';
 import { productRoutes } from './src/routes/productos.Routes';
 import { bodegasRoutes } from './src/routes/bodegas.Routes';
-import { corsOptions } from './src/utils/cors';
 import morgan from 'morgan';
 const app = express();
 
 
 //middleware
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan('dev'));
 app.set('etag', false);
 
