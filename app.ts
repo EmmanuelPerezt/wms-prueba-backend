@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 //swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagg));
 //routes
-app.get('/',(req:Request,res:Response)=>{
+app.get('/',(_req:Request,res:Response)=>{
     res.send('api corriendo')
 });
 app.use('/api/bodegas',bodegasRoutes);
