@@ -3,17 +3,23 @@ import mongoose from "mongoose";
 
 
 const Product = mongoose.model('product', new mongoose.Schema({
-    SKU: {type: String, required: true},
-    name: {type: String, required: true},
-    stock: {type: Number, required: true},
-    minimum_stock: {type: Number, required: true},
-    maximum_stock: {type: Number, required: true},
-    lot: {type: String, required: true},
-    serial_number: {type: String, required: true},
-    expiration_date: {type: Date, required: true},
-    warehouse_location: {type: mongoose.Schema.Types.ObjectId, ref: 'warehouse', required: true},
-    pediment: {type: String, required: true},
-    action: {type: String, required: true }
+
+
+  name: { type: String, required: true },
+  description: { type: String },
+  category: { type: String },
+  unit_of_measure: { type: String },
+  barcode: { type: String },
+  is_batch_tracked: { type: Boolean, default: false },
+  is_expiry_tracked: { type: Boolean, default: false },
+  min_stock_level: { type: Number },
+  max_stock_level: { type: Number },
+  default_location: { type: String },
+  supplier_id: { type: String }, // puedes reemplazar por ref si tienes modelo Supplier
+  price: { type: mongoose.Schema.Types.Decimal128, default: 0.00 }, // o Number si no necesitas precisión alta
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
+  status: { type: String, enum: ['Activo', 'Inactivo', 'Obsoleto'], default: 'Activo' },
 }));
 
 
