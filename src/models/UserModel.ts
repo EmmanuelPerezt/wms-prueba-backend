@@ -11,6 +11,6 @@ const User = mongoose.model('user', new mongoose.Schema({
     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     modifiedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     isActive: {type: Boolean, default: true},
-    role: {typpe: mongoose.Schema.Types.ObjectId, ref: 'role', required: true},
+    role: {type: mongoose.Schema.Types.ObjectId, ref: 'role', required: true},
 }));
 export {User}

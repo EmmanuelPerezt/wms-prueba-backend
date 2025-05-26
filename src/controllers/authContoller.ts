@@ -5,6 +5,12 @@ import jwt from 'jsonwebtoken';
 
 const registerUser = async (req: Request, res: Response) => {
     const {name, username, email, password, role } = req.body;
+    if (!name || !username || !email || !password || !role) {
+         res.status(400).json({
+            message: 'Todos los campos son obligatorios'
+        });
+        return;
+    }
     try {
         const user = new User({
             name,
