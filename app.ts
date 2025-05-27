@@ -18,11 +18,8 @@ app.use(morgan('dev'));
 
 //swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagg));
-//routes
-app.get('/',(_req:Request,res:Response)=>{
-    res.send('api corriendo')
-});
-app.use('/api/bodegas',bodegasRoutes);
+
+app.use('/api/warehouse',bodegasRoutes);
 app.use('/api/',productRoutes)
 
 //auth
@@ -30,4 +27,5 @@ app.use('/api/auth/',authRouter);
 
 app.listen(3000, ()=>{
     console.log('server corriendo en puerto 3000')
+    console.log('http://localhost:3000/api-docs');
 });
