@@ -4,8 +4,8 @@ import { getAllbodegas, addBodega } from "../controllers/warehouseController";
 const bodegasRoutes = Router();
 
 
-bodegasRoutes.post('/',addBodega);
-bodegasRoutes.get('/', getAllbodegas);
+// bodegasRoutes.post('/',addBodega);
+// bodegasRoutes.get('/', getAllbodegas);
 
 
 

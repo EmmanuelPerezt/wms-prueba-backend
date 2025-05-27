@@ -8,7 +8,7 @@ const stock = mongoose.model( 'stock', new mongoose.Schema({
   lote: { type: String },
   serial_number: { type: String },
   expiration_date: { type: Date },
-  warehouse_location: { type: mongoose.Schema.Types.ObjectId, ref: 'Warehouse', required: true },
+  warehouse_location: { type: mongoose.Schema.Types.ObjectId, ref: 'warehouse', required: true },
   pediment: { type: String },
   action: { type: String, enum: ['entrada', 'salida', 'ajuste', 'transferencia'], required: true },
   created_at: { type: Date, default: Date.now },
