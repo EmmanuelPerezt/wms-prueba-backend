@@ -7,10 +7,35 @@ import { Product } from '../models/productModel';
 
 export const addProduct = async (req: Request, res: Response) => {
     await connectDB();
-    const { name, SKU, stock, package_number, provider, warehouse_location} = req.body;
+    const {
+        name,
+        description,
+        category,
+        unit_of_measure,
+        barcode,
+        is_batch_tracked,
+        is_expiry_tracked,
+        min_stock_level,
+        max_stock_level,
+        default_location,
+        supplier_id,
+        price,
+    } = req.body;
+
 
     const newProduct = new Product({
-        name, SKU, stock, package_number, provider, warehouse_location
+        name,
+        description,
+        category,
+        unit_of_measure,
+        barcode,
+        is_batch_tracked,
+        is_expiry_tracked,
+        min_stock_level,
+        max_stock_level,
+        default_location,
+        supplier_id,
+        price,
     });
 
     await newProduct.save()
@@ -29,49 +54,76 @@ export const addProduct = async (req: Request, res: Response) => {
 }
 
 
-
-export const updateStock = async (req:Request, res:Response)=>{
-   const {id} = req.params;
-   const {stock} = req.body;
-   await connectDB();
-   await Product.updateOne({_id:id}, {$set:{stock:stock}});
-   const update = await Product.find ({_id:id});
-
-   res.status(200).json({
-       message: "Stock actualizado",
-       update
-   });
-}
-
-
-
-export const filterProducts = async (req:Request, res:Response) => {
-    const { name, SKU, stock, package_number, provider, warehouse_location} = req.query;
+export const filterProducts = async (req: Request, res: Response) => {
+    const filtros: any = req.query;
     await connectDB();
-    if (!req.query){
+    if (!req.query) {
         const allproductos = await Product.find();
         res.status(200).json({
-            message: "Todos los productos",
+            message: "All Products",
             allproductos
         })
     }
-    //se puede mejorar
-const filtros: any = {};
-    if (name) filtros.name = name;
-    if (SKU) filtros.SKU = SKU;
-    if (stock) filtros.stock= stock;
-    if (package_number) filtros.package_number = package_number;
-    if (provider) filtros.provider = provider;
-    if (warehouse_location) filtros.warehouse_location = warehouse_location;
 
-    const productos =await Product.find(filtros);
-    if (productos.length === 0) {
-        res.status(404).json({
-            message: "No se encontraron productos con esos filtros"
-        });
+    try {
+        const productos = await Product.find(filtros);
+        if (productos.length === 0) {
+            res.status(404).json({
+                message: "No se encontraron productos con esos filtros"
+            });
+        }
+        res.status(200).json({
+            message: "Productos encontrados",
+            productos
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: "error al filtrar pproductos",
+            error: error
+        })
     }
+}
+
+export const updateProduct = async (req: Request, res: Response) => {
+    const updateData = req.body;
+    const { id } = req.params;
+    await connectDB();
+    try {
+        const updateProduct =await Product.findByIdAndUpdate(id, updateData)
+        if (!updateProduct) res.status(404).json({ message: 'producto no encontrado'})
+        res.status(200).json({
+            message: "Producto actualizado",
+            updateProduct
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: "error al actualizar el producto",
+            error: error
+        })
+    }
+    
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await connectDB();
+    const product = await Product.findByIdAndDelete(id);
+    if (!product)  res.status(404).json({ message: "producto no encontrado"})
     res.status(200).json({
-        message: "Productos encontrados",
-        productos
+        message: "product deleted",
+        product
     })
 }
+
+// export const updateStock = async (req: Request, res: Response) => {
+//     const { id } = req.params;
+//     const { stock } = req.body;
+//     await connectDB();
+//     await Product.updateOne({ _id: id }, { $set: { stock: stock } });
+//     const update = await Product.find({ _id: id });
+
+//     res.status(200).json({
+//         message: "Stock actualizado",
+//         update
+//     });
+// }

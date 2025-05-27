@@ -2,8 +2,7 @@ import express from 'express'
 import cors from 'cors';
 import swaggerUi from "swagger-ui-express";
 import { readFileSync } from 'fs';
-import { Request, Response } from 'express';
-import { productRoutes } from './src/routes/productos.Routes';
+import { productRoutes } from './src/routes/products.Routes';
 import { bodegasRoutes } from './src/routes/bodegas.Routes';
 import morgan from 'morgan';
 import { authRouter } from './src/routes/auth.Routes';
