@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
 
     try {
-        mongoose.connect('mongodb://localhost:27017/test')
+        mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/test')
 
 
     } catch (error) {

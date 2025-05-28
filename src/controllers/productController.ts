@@ -6,6 +6,7 @@ import { Product } from '../models/productModel';
 
 
 export const addProduct = async (req: Request, res: Response) => {
+
     await connectDB();
     const {
         name,

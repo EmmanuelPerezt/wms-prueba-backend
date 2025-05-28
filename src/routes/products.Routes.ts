@@ -4,10 +4,10 @@ import { addProduct, deleteProduct, filterProducts, updateProduct } from "../con
 const productRoutes = Router();
 
 
-productRoutes.get('product', filterProducts);
-productRoutes.post('product', addProduct);
-productRoutes.patch('product/:id', updateProduct)
-productRoutes.delete('product/:id', deleteProduct);
+productRoutes.get('/product', filterProducts);
+productRoutes.post('/product', addProduct);
+productRoutes.patch('/product/:id', updateProduct)
+productRoutes.delete('/product/:id', deleteProduct);
 
 
 
