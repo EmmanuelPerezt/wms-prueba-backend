@@ -3,7 +3,7 @@ import cors from 'cors';
 import swaggerUi from "swagger-ui-express";
 import { readFileSync } from 'fs';
 import { productRoutes } from './src/routes/products.Routes';
-import { bodegasRoutes } from './src/routes/bodegas.Routes';
+import {warehouseRoutes } from './src/routes/warehouse.Routes';
 import morgan from 'morgan';
 import { authRouter } from './src/routes/auth.Routes';
 const app = express();
@@ -18,7 +18,7 @@ app.use(morgan('dev'));
 //swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagg));
 
-app.use('/api/warehouse',bodegasRoutes);
+app.use('/api/warehouse',warehouseRoutes);
 app.use('/api/',productRoutes)
 
 //auth
