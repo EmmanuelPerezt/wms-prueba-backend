@@ -60,6 +60,11 @@ export const filterProducts = async (req: Request, res: Response) => {
     await connectDB();
     if (!req.query) {
         const allproductos = await Product.find();
+        if (allproductos.length === 0){
+            res.status(404).json({
+                message:"products not found"
+            })
+        }
         res.status(200).json({
             message: "All Products",
             allproductos
