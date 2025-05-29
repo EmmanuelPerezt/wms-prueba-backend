@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { getAllbodegas, addBodega } from "../controllers/warehouseController";
+import { addWarehouse, deleteWarehouse, getAllWarehouse, updateWareouse } from "../controllers/warehouseController";
 
 const warehouseRoutes = Router();
 
+
+
+warehouseRoutes.get('/warehouse', getAllWarehouse);
+warehouseRoutes.post('/warehouse', addWarehouse);
+warehouseRoutes.patch('/warehouse/:id', updateWareouse);
+warehouseRoutes.delete('/warehouse/:id', deleteWarehouse);
 
 // warehouseRoutes.post('/',addBodega);
 // warehouseRoutes.get('/', getAllbodegas);

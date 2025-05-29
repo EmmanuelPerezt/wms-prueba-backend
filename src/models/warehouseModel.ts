@@ -9,7 +9,7 @@ const warehouse = mongoose.model('warehouse', new mongoose.Schema({
   aisle_count: { type: Number },
   racks_per_aisle: { type: Number },
   levels_per_rack: { type: Number },
-  default: { type: Boolean, default: false },
+  Default: { type: Boolean, default: false },
   status: { type: String, enum: ['Activo', 'Inactivo'], default: 'Activo' },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }

@@ -3,7 +3,7 @@ import { connectDB } from "../utils/dbConection"
 import { Request, Response } from "express";
 
 
-const getAllbodegas = async (req: Request, res: Response) =>{
+const getAllWarehouse = async (req: Request, res: Response) =>{
     await connectDB();
     const bodegas = await warehouse.find();
     if (bodegas.length === 0){
@@ -17,16 +17,31 @@ const getAllbodegas = async (req: Request, res: Response) =>{
 }
 
 
-const addBodega = async (req: Request, res: Response) => {
+const addWarehouse = async (req: Request, res: Response) => {
     await connectDB();
 
-    const { name, location, description} = req.body;
-    const bodega = new warehouse({
-        name,
-        location,
-        description,
+    const {
+        warehouse_name,
+        warehouse_code,
+        square_meters,
+        aisle_count,
+        racks_per_aisle,
+        levels_per_rack,
+        Default,
+        status
+    } = req.body;
+    const newWarehouse = new warehouse({
+        warehouse_name,
+        warehouse_code,
+        square_meters,
+        aisle_count,
+        racks_per_aisle,
+        levels_per_rack,
+        Default,
+        status
+        
     })
-    await bodega.save()
+    await newWarehouse.save()
         .then((data)=>{
             res.status(200).json({
                 message: "Bodega creada"
@@ -35,9 +50,48 @@ const addBodega = async (req: Request, res: Response) => {
         .catch((error)=>{
             res.status(500).json({
                 message: "Error al crear la bodega",
-                error: error
+                error
             })
         })
 };
+const updateWareouse = async (req: Request, res:Response) =>{
+    const { id } = req.params;
+    const updateData = req.body;
+    await connectDB();
+    try {
+        const updatedWarehouse = await warehouse.findByIdAndUpdate(id, updateData)
+        res.status(200).json({
+            message:"bodega actualizada",
+            updatedWarehouse
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "error to update warehouse",
+            error
+        })
+    }
+}
 
-export {getAllbodegas, addBodega}
+const deleteWarehouse = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await connectDB();
+    try {
+        const deletedWarehouse = await warehouse.findByIdAndDelete(id);
+        if (!deletedWarehouse) {
+            res.status(404).json({
+                message: "Bodega no encontrada"
+            });
+        }
+        res.status(200).json({
+            message: "Bodega eliminada",
+            deletedWarehouse
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al eliminar la bodega",
+            error
+        });
+    }
+}
+
+export {getAllWarehouse, addWarehouse, updateWareouse, deleteWarehouse}
