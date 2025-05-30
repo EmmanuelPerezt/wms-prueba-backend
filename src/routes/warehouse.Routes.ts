@@ -5,11 +5,11 @@ const warehouseRoutes = Router();
 
 
 
-warehouseRoutes.get('/warehouse', getAllWarehouse);
-warehouseRoutes.get('/warehouse/:id', getAllWarehouse); 
-warehouseRoutes.post('/warehouse', addWarehouse);
-warehouseRoutes.patch('/warehouse/:id', updateWareouse);
-warehouseRoutes.delete('/warehouse/:id', deleteWarehouse);
+warehouseRoutes.get('/', getAllWarehouse);
+warehouseRoutes.get('/:id', getAllWarehouse); 
+warehouseRoutes.post('/', addWarehouse);
+warehouseRoutes.patch('/:id', updateWareouse);
+warehouseRoutes.delete('/:id', deleteWarehouse);
 
 // warehouseRoutes.post('/',addBodega);
 // warehouseRoutes.get('/', getAllbodegas);

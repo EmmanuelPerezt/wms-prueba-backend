@@ -6,6 +6,7 @@ import { productRoutes } from './src/routes/products.Routes';
 import {warehouseRoutes } from './src/routes/warehouse.Routes';
 import morgan from 'morgan';
 import { authRouter } from './src/routes/auth.Routes';
+import { stockRoutes } from './src/routes/stock.Routes';
 const app = express();
 
 const swagg = JSON.parse(readFileSync('./src/utils/swagger.json', 'utf-8'));
@@ -19,7 +20,8 @@ app.use(morgan('dev'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagg));
 
 app.use('/api/warehouse',warehouseRoutes);
-app.use('/api/',productRoutes)
+app.use('/api/product',productRoutes)
+app.use('/api/stock', stockRoutes);
 
 //auth
 app.use('/api/auth/',authRouter);

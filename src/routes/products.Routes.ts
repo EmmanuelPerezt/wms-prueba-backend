@@ -4,11 +4,11 @@ import { addProduct, deleteProduct, filterProducts, findById, updateProduct } fr
 const productRoutes = Router();
 
 
-productRoutes.get('/product', filterProducts);
-productRoutes.get('/product/:id', findById); // Assuming you want to filter by ID as well
-productRoutes.post('/product', addProduct);
-productRoutes.patch('/product/:id', updateProduct)
-productRoutes.delete('/product/:id', deleteProduct);
+productRoutes.get('/', filterProducts);
+productRoutes.get('/:id', findById); // Assuming you want to filter by ID as well
+productRoutes.post('/', addProduct);
+productRoutes.patch('/:id', updateProduct)
+productRoutes.delete('/:id', deleteProduct);
 
 
 

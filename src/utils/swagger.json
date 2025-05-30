@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/api/warehouse/warehouse": {
+    "/api/warehouse/": {
       "get": {
         "description": "",
         "responses": {
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/api/warehouse/warehouse/{id}": {
+    "/api/warehouse/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -132,7 +132,7 @@
         }
       }
     },
-    "/api/product": {
+    "/api/product/": {
       "get": {
         "description": "",
         "responses": {
@@ -264,6 +264,145 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/stock/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": {
+                  "example": "any"
+                },
+                "warehouse_id": {
+                  "example": "any"
+                },
+                "location_code": {
+                  "example": "any"
+                },
+                "batch_number": {
+                  "example": "any"
+                },
+                "expiry_date": {
+                  "example": "any"
+                },
+                "serial_number": {
+                  "example": "any"
+                },
+                "quantity": {
+                  "example": "any"
+                },
+                "reserved_quantity": {
+                  "example": "any"
+                },
+                "available_quantity": {
+                  "example": "any"
+                },
+                "last_movement_date": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/stock/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
