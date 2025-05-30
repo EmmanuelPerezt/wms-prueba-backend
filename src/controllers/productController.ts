@@ -97,6 +97,10 @@ export const findById = async (req: Request, res: Response) => {
         res.status(404).json({
             message: "producto no encontrado"})
     }
+    res.status(200).json({
+        message: "Producto encontrado",
+        product
+    })
 }
 
 export const updateProduct = async (req: Request, res: Response) => {

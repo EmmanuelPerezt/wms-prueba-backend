@@ -6,6 +6,7 @@ const warehouseRoutes = Router();
 
 
 warehouseRoutes.get('/warehouse', getAllWarehouse);
+warehouseRoutes.get('/warehouse/:id', getAllWarehouse); 
 warehouseRoutes.post('/warehouse', addWarehouse);
 warehouseRoutes.patch('/warehouse/:id', updateWareouse);
 warehouseRoutes.delete('/warehouse/:id', deleteWarehouse);

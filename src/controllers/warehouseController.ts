@@ -16,6 +16,20 @@ const getAllWarehouse = async (req: Request, res: Response) =>{
         });
 }
 
+const getWarehouseById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await connectDB();
+    const bodega = await warehouse.findById(id);
+    if (!bodega) {
+        return res.status(404).json({
+            message: "Bodega no encontrada"
+        });
+    }
+    res.status(200).json({
+        bodega
+    });
+}
+
 
 const addWarehouse = async (req: Request, res: Response) => {
     await connectDB();
@@ -94,4 +108,4 @@ const deleteWarehouse = async (req: Request, res: Response) => {
     }
 }
 
-export {getAllWarehouse, addWarehouse, updateWareouse, deleteWarehouse}
+export {getAllWarehouse, addWarehouse, updateWareouse, deleteWarehouse, getWarehouseById}
