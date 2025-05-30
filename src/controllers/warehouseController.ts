@@ -57,7 +57,7 @@ const addWarehouse = async (req: Request, res: Response) => {
     })
     await newWarehouse.save()
         .then((data)=>{
-            res.status(200).json({
+            res.status(201).json({
                 message: "Bodega creada"
             })
         })
