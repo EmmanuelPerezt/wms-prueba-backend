@@ -89,6 +89,15 @@ export const filterProducts = async (req: Request, res: Response) => {
         })
     }
 }
+export const findById = async (req: Request, res: Response) => {
+    const {id } = req.params;
+    await connectDB();
+    const product = await Product.findById(id);
+    if (!product){
+        res.status(404).json({
+            message: "producto no encontrado"})
+    }
+}
 
 export const updateProduct = async (req: Request, res: Response) => {
     const updateData = req.body;
