@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { addWarehouse, deleteWarehouse, getAllWarehouse, updateWareouse } from "../controllers/warehouseController";
+import { addWarehouse, deleteWarehouse, getAllWarehouse, getWarehouseById, updateWareouse } from "../controllers/warehouseController";
 
 const warehouseRoutes = Router();
 
 
 
 warehouseRoutes.get('/', getAllWarehouse);
-warehouseRoutes.get('/:id', getAllWarehouse); 
+warehouseRoutes.get('/:id', getWarehouseById);
 warehouseRoutes.post('/', addWarehouse);
 warehouseRoutes.patch('/:id', updateWareouse);
 warehouseRoutes.delete('/:id', deleteWarehouse);
@@ -17,6 +17,6 @@ warehouseRoutes.delete('/:id', deleteWarehouse);
 
 
 
-export {warehouseRoutes}
+export { warehouseRoutes }
 
 
