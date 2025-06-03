@@ -11,8 +11,15 @@ const getAllWarehouse = async (_req: Request, res: Response) => {
       message: "no hay bodegas"
     });
   }
+  const warehouses: any = [];
+  for (const bodega of bodegas) {
+    warehouses.push({
+      id: bodega._id,
+      warehouses: bodega.warehouse_name
+    });
+  }
   res.status(200).json({
-    bodegas
+    warehouses
   });
 }
 
