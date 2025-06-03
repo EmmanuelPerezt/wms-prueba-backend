@@ -11,6 +11,18 @@ const getAllWarehouse = async (_req: Request, res: Response) => {
       message: "no hay bodegas"
     });
   }
+  res.status(200).json({
+    bodegas
+  });
+}
+const getAllWarehousewithoutDetails = async (_req: Request, res: Response) => {
+  await connectDB();
+  const bodegas = await warehouse.find();
+  if (bodegas.length === 0) {
+    res.status(404).json({
+      message: "no hay bodegas"
+    });
+  }
   const warehouses: any = [];
   for (const bodega of bodegas) {
     warehouses.push({
@@ -21,6 +33,7 @@ const getAllWarehouse = async (_req: Request, res: Response) => {
   res.status(200).json({
     warehouses
   });
+
 }
 
 const getWarehouseById = async (req: Request, res: Response) => {
@@ -123,4 +136,4 @@ const deleteWarehouse = async (req: Request, res: Response) => {
   }
 }
 
-export { getAllWarehouse, addWarehouse, updateWareouse, deleteWarehouse, getWarehouseById }
+export { getAllWarehouse, addWarehouse, updateWareouse, deleteWarehouse, getWarehouseById, getAllWarehousewithoutDetails }
