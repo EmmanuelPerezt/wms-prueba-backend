@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, loginUser } from "../controllers/authContoller";
+import { registerUser, loginUser } from "../controllers/authController";
 
 
 
@@ -11,4 +11,4 @@ authRouter.post("/login", loginUser)
 
 
 
-export { authRouter}
+export { authRouter }
