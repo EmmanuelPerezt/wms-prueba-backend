@@ -9,7 +9,7 @@ const Product = mongoose.model('product', new mongoose.Schema({
   unit_of_measure: { type: String },
   unit_base: { type: String },// aun no se bien que tipo de datos van a ser
   unit_logistic: { type: String },
-  factor_convertor: { type: String },
+  factor_convertor: { type: Number },
   barcode: { type: String },
   is_batch_tracked: { type: Boolean, default: false },
   is_expiry_tracked: { type: Boolean, default: false },

@@ -46,19 +46,14 @@ export const addProduct = async (req: Request, res: Response) => {
 
   });
 
-  await newProduct.save()
-    .then((data) => {
-      res.status(200).json({
-        message: "Producto creado",
-        data
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "Error al crear el producto",
-        error
-      });
-    });
+  const productSave = await newProduct.save();
+  res.status(201).json({
+    message: "Producto creado correctamente",
+    product: {
+      name: productSave.name,
+      id: productSave._id,
+    }
+  });
 }
 
 
