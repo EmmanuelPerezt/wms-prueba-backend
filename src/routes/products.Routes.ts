@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { addProduct, deleteProduct, filterProducts, findById, updateProduct } from "../controllers/productController";
+import { addProduct, deleteProduct, filterProducts, findById, getAllProductsWithoutDetails, updateProduct } from "../controllers/productController";
 
 const productRoutes = Router();
 
 
 productRoutes.get('/', filterProducts);
-productRoutes.get('/:id', findById); // Assuming you want to filter by ID as well
+productRoutes.get('/list', getAllProductsWithoutDetails)
+productRoutes.get('/:id', findById);
 productRoutes.post('/', addProduct);
 productRoutes.patch('/:id', updateProduct)
 productRoutes.delete('/:id', deleteProduct);

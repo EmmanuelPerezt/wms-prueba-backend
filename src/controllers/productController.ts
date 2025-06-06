@@ -56,6 +56,27 @@ export const addProduct = async (req: Request, res: Response) => {
   });
 }
 
+export const getAllProductsWithoutDetails = async (_req: Request, res: Response) => {
+  await connectDB();
+  const allProducts = await Product.find();
+  if (allProducts.length === 0) {
+      res.status(404).json({
+      message: "No products found"
+    });
+  }
+  const products: any = [];
+  for (const product of allProducts) {
+    products.push({
+      id: product._id,  
+      name: product.name
+    });
+  }
+  res.status(200).json({
+    message: "All Products",
+    products
+  });
+}
+
 
 export const filterProducts = async (req: Request, res: Response) => {
   const filtros: any = req.query;
