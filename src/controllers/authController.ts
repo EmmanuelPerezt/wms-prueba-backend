@@ -40,6 +40,7 @@ const deletUser = async (req: Request, res: Response) => {
 const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
+    await connectDB();
     const user = await User.findOne({ email });
     if (!user) {
       res.status(404).json({
