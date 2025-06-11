@@ -21,7 +21,7 @@ const registerUser = async (req: Request, res: Response) => {
       password: bcrypt.hashSync(password, 10),
       role
     })
-    const exist = await User.exists({ $or: [{ email }, { username }] }) ? res.status(400).json({ mesage: "user already exits" })
+    await User.exists({ $or: [{ email }, { username }] }) ? res.status(400).json({ mesage: "user already exits" })
       : user.save().then(user => {
         res.status(201).json({
           message: 'Usuario registrado',
