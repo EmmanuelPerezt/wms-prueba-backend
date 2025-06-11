@@ -83,5 +83,9 @@ const loginUser = async (req: Request, res: Response) => {
 
   }
 }
-
-export { registerUser, loginUser };
+const verifyToken = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  jwt.verify(id, 'secret') ? res.status(200).json({ message: true })
+    : res.status(401).json({ message: false });
+}
+export { registerUser, loginUser, verifyToken };
