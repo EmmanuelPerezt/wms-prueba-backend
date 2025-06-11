@@ -21,10 +21,16 @@ const registerUser = async (req: Request, res: Response) => {
       password: bcrypt.hashSync(password, 10),
       role
     })
-    await user.save();
-    res.status(201).json({
-      message: 'Usuario registrado'
-    })
+    const exist = await User.exists({ $or: [{ email }, { username }] }) ? res.status(400).json({ mesage: "user already exits" })
+      : user.save().then(user => {
+        res.status(201).json({
+          message: 'Usuario registrado',
+          user: {
+            name: user.name,
+            role: user.role
+          }
+        })
+      });
   } catch (error) {
     res.status(500).json({
       message: 'Error al registrar el usuario',
